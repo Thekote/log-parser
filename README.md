@@ -17,3 +17,15 @@ rvm use 3.1.0 --default
 ### **Check your ruby installation**
 which ruby
 
+### **Install Bundler to manage your gems**
+gem install bundler
+
+### **Install Rspec**
+gem install rspec
+
+## **Run your application**
+ruby main.rb
+
+## **Run Rspec tests**
+bundle exec rspec
+
