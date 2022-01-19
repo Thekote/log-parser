@@ -1,3 +1,5 @@
-source ruby '3.1.0':"https://bundler.io/gemfile_ruby.html"
+source "https://rubygems.org"
 
-gem 'rspec'
+ruby '3.1.0'
+
+gem 'rspec', '~> 3.10'
