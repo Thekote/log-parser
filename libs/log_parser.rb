@@ -1,8 +1,11 @@
 class LogParser
-  
-  def read_first_line(file_name)
+  def initialize (path)
+    @file_name = path
+  end
+
+  def read_first_line
     begin
-      file = File.open(file_name)
+      file = File.open(@file_name)
       first_line = file.readline
       file.close
       first_line
@@ -11,3 +14,4 @@ class LogParser
     end
   end
 end
+
