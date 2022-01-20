@@ -24,7 +24,7 @@ class LogParser
   def parse_file
     count_lines
     obj = {
-      "#{@file_name}": {
+      "#{@file_name.split("/").last}": {
         lines: @lines
       }
     }
