@@ -28,5 +28,12 @@ describe LogParser do
       expect(parser.count_lines).to match(11)
     end
   end
+
+  describe '#player_filter' do
+    it 'should return list of players on the file' do
+      parser = LogParser.new('./spec/fixtures/game_test.log')
+      expect(parser.player_filter).to eq(["Isgalamido"])
+    end
+  end
 end
 
