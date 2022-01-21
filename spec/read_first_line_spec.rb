@@ -17,7 +17,7 @@ describe LogParser do
   describe '#parse_file' do
     it 'should return a json when called' do
       parser = LogParser.new('./spec/fixtures/game_test.log')
-      obj = {"game_test.log": {"lines": 11}}
+      obj = {"game_test.log": {"lines": 11, "players": ["Isgalamido"]}}
       expect(parser.parse_file).to eq(JSON.pretty_generate(obj))
     end
   end
