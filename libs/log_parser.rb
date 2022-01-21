@@ -37,8 +37,11 @@ class LogParser
   def player_filter
     File.readlines(@file_name).each do |line|
       if line.include? "killed"
-        player = line.split("killed").last.split("by").first
-        @players.push(player) unless @players.include?(player)  
+        player = line.split("killed ").last.split(" by").first
+        @players.push(player) unless @players.include?(player)
+      elsif line.include? "ClientUserinfoChanged"
+        player = line.split(" n\\").last.split("\\t").first
+        @players.push(player) unless @players.include?(player) 
       end
     end
   end
