@@ -5,6 +5,7 @@ class LogParser
   def initialize (path)
     @file_name = path
     @players = []
+    @kill_count = 0
   end
 
   def read_first_line
@@ -25,10 +26,12 @@ class LogParser
   def parse_file
     count_lines
     player_filter
+    kill_counter
     obj = {
       "#{@file_name.split("/").last}": {
         lines: @lines,
-        players: @players
+        players: @players,
+        total_kills: @kill_count
       }
     }
     obj_json = JSON.pretty_generate(obj)
@@ -46,5 +49,16 @@ class LogParser
     end
     @players
   end
+
+  def kill_counter
+    File.readlines(@file_name).each do |line|
+      if line.include? "killed"
+        @kill_count += 1
+      end
+    end
+    @kill_count
+  end
+
+
 end
 
