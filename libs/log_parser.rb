@@ -28,7 +28,7 @@ class LogParser
     player_filter
     kill_counter
     obj = {
-      "#{@file_name.split("/").last}": {
+      "#{@file_name}": {
         lines: @lines,
         players: @players,
         total_kills: @kill_count
