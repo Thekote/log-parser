@@ -44,6 +44,7 @@ class LogParser
         @players.push(player) unless @players.include?(player) 
       end
     end
+    @players
   end
 end
 
