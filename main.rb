@@ -1,5 +1,7 @@
-require_relative "./libs/log_parser.rb"
+# frozen_string_literal: true
 
-parser = LogParser.new("games.log")
+require_relative './libs/log_parser'
+
+parser = LogParser.new('games.log')
 
 print parser.parse_file
