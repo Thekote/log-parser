@@ -21,14 +21,7 @@ describe LogParser do
       expect(parser.parse_file).to eq(JSON.pretty_generate(obj))
     end
   end
-
-  describe '#count_lines' do
-    it 'should not fail if the number of lines is correct' do
-      parser = LogParser.new('./spec/fixtures/game_test.log')
-      expect(parser.count_lines).to match(11)
-    end
-  end
-
+  
   describe '#player_filter' do
     it 'should return list of players on the file' do
       parser = LogParser.new('./spec/fixtures/game_test.log')

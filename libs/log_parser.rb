@@ -18,10 +18,6 @@ class LogParser
     end
   end
 
-  def count_lines
-    @lines = File.foreach(@file_name).count
-  end
-
   def parse_file
     count_lines
     player_filter
@@ -36,15 +32,23 @@ class LogParser
 
   def player_filter
     File.readlines(@file_name).each do |line|
-      if line.include? "killed"
-        player = line.split("killed ").last.split(" by").first
-        @players.push(player) unless @players.include?(player)
-      elsif line.include? "ClientUserinfoChanged"
-        player = line.split(" n\\").last.split("\\t").first
+      if line.include? "ClientUserinfoChanged"
+        player = get_player(line)
         @players.push(player) unless @players.include?(player) 
       end
     end
     @players
   end
+
+  private
+  
+  def get_player(line)
+    line.split(" n\\").last.split("\\t").first
+  end
+
+  def count_lines
+    @lines = File.foreach(@file_name).count
+  end
+
 end
 
