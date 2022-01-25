@@ -52,4 +52,13 @@ class LogParser
   def count_lines
     @lines = File.foreach(@file_name).count
   end
+
+  def kill_counter
+    File.readlines(@file_name).each do |line|
+      if line.include?('killed') && !line.include?('world')
+        @kill_count += 1
+      end
+    end
+  end
+
 end
