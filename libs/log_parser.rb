@@ -7,6 +7,8 @@ class LogParser
   def initialize(path)
     @file_name = path
     @players = []
+    @kill_count = 0
+    @player_kills = []
   end
 
   def read_first_line
@@ -21,10 +23,15 @@ class LogParser
   def parse_file
     count_lines
     player_filter
+    kill_counter
+    player_kill_counter
     obj = {
       "#{@file_name.split('/').last}": {
         lines: @lines,
-        players: @players
+        players: @players,
+        kills: @player_kills.tally,
+        total_kills: @kill_count
+
       }
     }
     JSON.pretty_generate(obj)
@@ -40,13 +47,36 @@ class LogParser
     @players
   end
 
+  def player_kill_counter
+    File.readlines(@file_name).each do |line|
+      if line.include?('killed') && !line.include?('world')
+        player = get_killer(line)
+        @player_kills.push(player)
+      end
+    end
+    @player_kills.tally
+  end
+
   private
 
   def get_player(line)
     line.split(' n\\').last.split('\\t').first
   end
 
+  def get_killer(line)
+    line.split(' killed').first.split(': ').last
+  end
+
   def count_lines
     @lines = File.foreach(@file_name).count
   end
+
+  def kill_counter
+    File.readlines(@file_name).each do |line|
+      if line.include?('killed') && !line.include?('world')
+        @kill_count += 1
+      end
+    end
+  end
+
 end
