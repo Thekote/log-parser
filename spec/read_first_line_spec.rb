@@ -19,7 +19,7 @@ describe LogParser do
   describe '#parse_file' do
     it 'should return a json when called' do
       parser = LogParser.new('./spec/fixtures/game_test.log')
-      obj = { "game_test.log": { "lines": 12, "players": ['Isgalamido'], "total_kills": 1 } }
+      obj = { "game_test.log": { "lines": 12, "players": ['Isgalamido'], "kills": {"Zeh": 1}, "total_kills": 1 } }
       expect(parser.parse_file).to eq(JSON.pretty_generate(obj))
     end
   end
@@ -30,4 +30,12 @@ describe LogParser do
       expect(parser.player_filter).to eq(['Isgalamido'])
     end
   end
+
+  describe '#player_kill_counter' do
+    it 'should return a list of players and their number of kills' do
+      parser = LogParser.new('./spec/fixtures/game_test.log')
+      expect(parser.player_kill_counter).to eq({"Zeh"=>1})
+    end
+  end
+
 end
